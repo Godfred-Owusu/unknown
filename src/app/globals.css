@@ -1,26 +1,553 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+@import "../styles/tokens.css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:is(.dark *));
 
 @theme inline {
+  /* Core semantic colors */
   --color-background: var(--background);
+  --color-surface: var(--surface);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-muted-foreground: var(--muted-foreground);
+
+  /* Primary palette */
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-accent-cyan: var(--accent-cyan);
+
+  /* UI elements */
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* Component colors */
+  --color-card: var(--surface);
+  --color-card-foreground: var(--foreground);
+  --color-popover: var(--surface);
+  --color-popover-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--foreground);
+  --color-destructive: var(--destructive);
+
+  /* Secondary surface */
+  --color-secondary-surface: var(--secondary-surface);
+
+  /* Navbar */
+  --color-navbar: var(--navbar);
+
+  /* Glass and glow effects */
+  --color-glass: var(--glass);
+  --color-glow: var(--glow);
+
+  /* Gradient tokens */
+  --color-gradient-start: var(--gradient-start);
+  --color-gradient-middle: var(--gradient-middle);
+  --color-gradient-end: var(--gradient-end);
+
+  /* Fonts */
+  --font-sans: var(--font-inter), Inter, system-ui, sans-serif;
+  --font-heading: var(--font-geist), Geist, sans-serif;
+  --font-body: var(--font-inter), Inter, system-ui, sans-serif;
+  --font-ui: var(--font-inter), Inter, system-ui, sans-serif;
+  --font-button: var(--font-inter), Inter, system-ui, sans-serif;
+  --font-nav: var(--font-geist), Geist, sans-serif;
+  --font-hero: var(--font-geist), Geist, sans-serif;
+  --font-input: var(--font-inter), Inter, system-ui, sans-serif;
+  --font-data: var(--font-inter), Inter, system-ui, sans-serif;
+  --font-label: var(--font-inter), Inter, system-ui, sans-serif;
+  --font-accent: var(--font-inter), Inter, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+
+  /* Radius tokens */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+  --radius-2xl: 16px;
+  --radius-3xl: 20px;
+  --radius-4xl: 24px;
+
+  /* Chart colors */
+  --color-chart-1: var(--primary);
+  --color-chart-2: var(--secondary);
+  --color-chart-3: var(--accent-cyan);
+  --color-chart-4: oklch(0.7 0.15 180);
+  --color-chart-5: oklch(0.7 0.15 120);
+
+  /* Sidebar */
+  --color-sidebar: var(--surface);
+  --color-sidebar-foreground: var(--foreground);
+  --color-sidebar-primary: var(--primary);
+  --color-sidebar-primary-foreground: var(--primary-foreground);
+  --color-sidebar-accent: var(--accent);
+  --color-sidebar-accent-foreground: var(--accent-foreground);
+  --color-sidebar-border: var(--border);
+  --color-sidebar-ring: var(--ring);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* ============================================
+   TAPLINK DESIGN SYSTEM - DARK MODE (DEFAULT)
+   Dark mode is the default - no class needed
+   ============================================ */
+:root {
+  /* Backgrounds */
+  --background: #050505;
+  --surface: #0d0d0d;
+  --secondary-surface: #18181b;
+  --muted: #18181b;
+
+  /* Text */
+  --foreground: #ffffff;
+  --muted-foreground: #a1a1aa;
+  --primary-foreground: #ffffff;
+  --secondary-foreground: #ffffff;
+  --accent-foreground: #ffffff;
+
+  /* Primary palette */
+  --primary: #5b5ffb;
+  --secondary: #8b5cf6;
+  --accent: #8b5cf6;
+  --accent-cyan: #00b7ff;
+
+  /* UI elements */
+  --border: #27272a;
+  --input: #111111;
+  --ring: #5b5ffb;
+
+  /* Navbar */
+  --navbar: rgba(5, 5, 5, 0.75);
+
+  /* Effects */
+  --glass: rgba(255, 255, 255, 0.05);
+  --glow: rgba(91, 95, 251, 0.35);
+
+  /* Gradients */
+  --gradient-start: #5b5ffb;
+  --gradient-middle: #8b5cf6;
+  --gradient-end: #00b7ff;
+
+  /* Destructive */
+  --destructive: oklch(0.704 0.191 27.325);
+
+  /* Radius */
+  --radius: 0.5rem;
+}
+
+/* ============================================
+   LIGHT MODE - Applied when .light class is present
+   Using .light instead of removing .dark for clarity
+   ============================================ */
+.light {
+  /* Backgrounds */
+  --background: #ffffff;
+  --surface: #f5f5f5;
+  --secondary-surface: #f1f5f9;
+  --muted: #f1f5f9;
+
+  /* Text */
+  --foreground: #111111;
+  --muted-foreground: #666666;
+  --primary-foreground: #ffffff;
+  --secondary-foreground: #ffffff;
+  --accent-foreground: #ffffff;
+
+  /* Primary palette */
+  --primary: #4f46e5;
+  --secondary: #7c3aed;
+  --accent: #7c3aed;
+  --accent-cyan: #0095d9;
+
+  /* UI elements */
+  --border: #e5e5e5;
+  --input: #ffffff;
+  --ring: #4f46e5;
+
+  /* Navbar */
+  --navbar: rgba(255, 255, 255, 0.75);
+
+  /* Effects */
+  --glass: rgba(0, 0, 0, 0.04);
+  --glow: rgba(79, 70, 229, 0.18);
+
+  /* Gradients */
+  --gradient-start: #6366f1;
+  --gradient-middle: #8b5cf6;
+  --gradient-end: #0ea5e9;
+
+  /* Destructive */
+  --destructive: oklch(0.704 0.191 27.325);
+}
+
+/* ============================================
+   BASE STYLES
+   ============================================ */
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    @apply scroll-smooth;
+    font-family: var(--font-inter), Inter, system-ui, sans-serif;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-inter), Inter, system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-geist), Geist, sans-serif;
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    line-height: 1.2;
+  }
+
+  h1 {
+    @apply text-4xl md:text-5xl lg:text-6xl;
+  }
+
+  h2 {
+    @apply text-3xl md:text-4xl;
+  }
+
+  h3 {
+    @apply text-2xl md:text-3xl;
+  }
+
+  h4 {
+    @apply text-xl md:text-2xl;
+  }
+
+  h5 {
+    @apply text-lg md:text-xl;
+  }
+
+  h6 {
+    @apply text-base md:text-lg;
+  }
+
+  p {
+    @apply leading-relaxed;
+  }
+
+  a {
+    @apply text-primary transition-colors duration-200;
+  }
+
+  /* Focus visible styles */
+  :focus-visible {
+    @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
+  }
+
+  /* Selection styling */
+  ::selection {
+    background-color: var(--primary);
+    color: var(--primary-foreground);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ============================================
+   SCROLLBAR STYLING
+   ============================================ */
+@layer base {
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--surface);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--muted-foreground);
+  }
+
+  /* Firefox */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--border) var(--surface);
+  }
+}
+
+/* ============================================
+   GLASSMORPHISM UTILITIES
+   ============================================ */
+@layer utilities {
+  .glass {
+    background: var(--glass);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--border);
+  }
+
+  .glass-strong {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--border);
+  }
+
+  .glass-navbar {
+    background: var(--navbar);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .glow {
+    box-shadow: 0 0 20px var(--glow);
+  }
+
+  .glow-sm {
+    box-shadow: 0 0 10px var(--glow);
+  }
+
+  .glow-lg {
+    box-shadow: 0 0 40px var(--glow);
+  }
+
+  /* Gradient text */
+  .gradient-text {
+    background: linear-gradient(
+      135deg,
+      var(--gradient-start),
+      var(--gradient-middle),
+      var(--gradient-end)
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Gradient background */
+  .gradient-bg {
+    background: linear-gradient(
+      135deg,
+      var(--gradient-start),
+      var(--gradient-middle),
+      var(--gradient-end)
+    );
+  }
+}
+
+/* ============================================
+   ANIMATION UTILITIES
+   ============================================ */
+@layer utilities {
+  /* Fade in */
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-out forwards;
+  }
+
+  .animate-fade-in-up {
+    animation: fadeInUp 0.5s ease-out forwards;
+  }
+
+  .animate-fade-in-down {
+    animation: fadeInDown 0.5s ease-out forwards;
+  }
+
+  /* Slide animations */
+  .animate-slide-up {
+    animation: slideUp 0.3s ease-out forwards;
+  }
+
+  .animate-slide-down {
+    animation: slideDown 0.3s ease-out forwards;
+  }
+
+  .animate-slide-in-left {
+    animation: slideInLeft 0.3s ease-out forwards;
+  }
+
+  .animate-slide-in-right {
+    animation: slideInRight 0.3s ease-out forwards;
+  }
+
+  /* Scale animations */
+  .animate-scale-in {
+    animation: scaleIn 0.2s ease-out forwards;
+  }
+
+  .animate-scale-out {
+    animation: scaleOut 0.15s ease-in forwards;
+  }
+
+  /* Shimmer effect for skeletons */
+  .animate-shimmer {
+    animation: shimmer 2s linear infinite;
+    background: linear-gradient(
+      90deg,
+      var(--surface) 0%,
+      var(--border) 50%,
+      var(--surface) 100%
+    );
+    background-size: 200% 100%;
+  }
+
+  /* Pulse for loading states */
+  .animate-pulse-slow {
+    animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  /* Float animation */
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+}
+
+/* Animation keyframes */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes scaleOut {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* ============================================
+   REDUCED MOTION
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
